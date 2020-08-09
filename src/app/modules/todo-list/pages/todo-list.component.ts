@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { TodoFormService } from '../services/todo-form.service';
+import { TodoService } from '../services/todo.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -13,7 +14,9 @@ export class TodoListComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() { }
+  constructor(
+    private todoService: TodoService
+  ) { }
 
   ngOnInit(): void {
     this.form = TodoFormService.getCreateTodoForm();
@@ -24,6 +27,7 @@ export class TodoListComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    this.todoService.createTodo(this.form.value);
   }
 
 }
