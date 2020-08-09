@@ -15,7 +15,8 @@
       "es2018",
       "dom"
     ],
-    "strict": true
+    "strict": true,
+    "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {
     "strictTemplates": true
