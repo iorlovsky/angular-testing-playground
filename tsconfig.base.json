@@ -16,5 +16,8 @@
       "dom"
     ],
     "strict": true
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
 }
