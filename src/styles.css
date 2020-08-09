@@ -1,5 +1,13 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
-h1 {
+:root {
+  --error-color: #dc3545;
+}
+
+h1, h2 {
   font-weight: normal;
+}
+
+.ng-dirty.ng-invalid {
+  border-color: var(--error-color);
 }
