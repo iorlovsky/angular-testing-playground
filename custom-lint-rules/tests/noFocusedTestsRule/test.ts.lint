@@ -1,0 +1,15 @@
+fdescribe();
+~~~~~~~~~~~   [Use of focused tests is forbidden]
+
+fit();
+~~~~~   [Use of focused tests is forbidden]
+
+describe();
+xdescribe();
+
+it();
+xit();
+
+fitness();
+
+
