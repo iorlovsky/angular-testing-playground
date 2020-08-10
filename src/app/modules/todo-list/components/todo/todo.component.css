@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+:host:hover {
+  background: #f5f5f5;
+}
