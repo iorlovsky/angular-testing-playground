@@ -35,7 +35,7 @@
 
     <ng-container *ngIf="todos$ | async as todos">
       <ng-container *ngIf="todos.length; else emptyList">
-        <app-todo *ngFor="let todo of todos" [todo]="todo"></app-todo>
+        <app-todo *ngFor="let todo of todos; trackBy: identifyTodo" [todo]="todo"></app-todo>
       </ng-container>
     </ng-container>
   </section>

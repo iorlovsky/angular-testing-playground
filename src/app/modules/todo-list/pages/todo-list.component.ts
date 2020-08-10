@@ -31,12 +31,19 @@ export class TodoListComponent implements OnInit {
     this.form = TodoFormService.getCreateTodoForm();
   }
 
+  identifyTodo(idx: number, todo: Todo): string {
+    return todo.createdTime;
+  }
+
   onSubmit(): void {
     Object.values(this.form.controls).forEach(control => control.markAsDirty());
     if (this.form.invalid) {
       return;
     }
-    this.todoService.createTodo(this.form.value);
+    this.todoService.createTodo({
+      ...this.form.value,
+      createdTime: new Date().toISOString()
+    });
   }
 
 }
