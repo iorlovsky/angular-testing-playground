@@ -1,34 +1,46 @@
 <header>
-  <h2>Add a todo</h2>
+  <h2>Todo list</h2>
 </header>
 
-<main class="row">
-  <form [formGroup]="form" class="mt-3 d-flex flex-column col-12 col-md-6 col-lg-3" (ngSubmit)="onSubmit()">
-    <!-- Title -->
-    <label class="form-group">
-      <span>Title</span>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter title"
-        formControlName="title">
-    </label>
+<main class="row mt-3">
+  <section class="col-12 col-md-6 col-lg-3">
+    <h3>Add a todo</h3>
+    <form class="d-flex flex-column" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Title -->
+      <label class="form-group">
+        <span>Title</span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter title"
+          formControlName="title">
+      </label>
 
-    <!-- Description -->
-    <label class="form-group">
-      <span>Description</span>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter description"
-        formControlName="description">
-    </label>
+      <!-- Description -->
+      <label class="form-group">
+        <span>Description</span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter description"
+          formControlName="description">
+      </label>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-  </form>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </section>
 
-  <section class="col-12 col-md-6 col-lg-9">
-    <app-todo *ngFor="let todo of todos | async" [todo]="todo"></app-todo>
+  <section class="mt-3 mt-md-0 col-12 col-md-6 col-lg-9">
+    <h3>Todo list</h3>
+
+    <ng-container *ngIf="todos$ | async as todos">
+      <ng-container *ngIf="todos.length; else emptyList">
+        <app-todo *ngFor="let todo of todos" [todo]="todo"></app-todo>
+      </ng-container>
+    </ng-container>
   </section>
 </main>
 
+<ng-template #emptyList>
+  <p>Here is nothing to do. Great plan!</p>
+</ng-template>

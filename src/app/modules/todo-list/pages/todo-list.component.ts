@@ -18,13 +18,13 @@ export class TodoListComponent implements OnInit {
 
   form: FormGroup;
 
-  readonly todos: Observable<Todo[]>;
+  readonly todos$: Observable<Todo[]>;
 
   constructor(
     private todoService: TodoService,
     private store: Store<{ todos: Todo[] }>
   ) {
-    this.todos = this.store.pipe(select('todos'));
+    this.todos$ = this.store.pipe(select('todos'));
   }
 
   ngOnInit(): void {
