@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { TodoFormService } from '../services/todo-form.service';
 import { TodoService } from '../services/todo.service';
 import { Todo } from '../types';
 
@@ -14,9 +13,7 @@ import { Todo } from '../types';
   styleUrls: ['./todo-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoListComponent implements OnInit {
-
-  form: FormGroup;
+export class TodoListComponent {
 
   readonly todos$: Observable<Todo[]>;
 
@@ -27,21 +24,16 @@ export class TodoListComponent implements OnInit {
     this.todos$ = this.store.pipe(select('todos'));
   }
 
-  ngOnInit(): void {
-    this.form = TodoFormService.getCreateTodoForm();
-  }
-
   identifyTodo(idx: number, todo: Todo): string {
     return todo.createdTime;
   }
 
-  onSubmit(): void {
-    Object.values(this.form.controls).forEach(control => control.markAsDirty());
-    if (this.form.invalid) {
+  onSubmit(form: FormGroup): void {
+    if (form.invalid) {
       return;
     }
     this.todoService.createTodo({
-      ...this.form.value,
+      ...form.value,
       createdTime: new Date().toISOString()
     });
   }

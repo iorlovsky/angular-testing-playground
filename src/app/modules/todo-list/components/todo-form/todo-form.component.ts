@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
+import { TodoFormService } from '../../services/todo-form.service';
 
 @Component({
   selector: 'app-todo-form',
@@ -8,9 +11,17 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class TodoFormComponent implements OnInit {
 
-  constructor() { }
+  @Output() submitEvent: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+
+  form: FormGroup;
 
   ngOnInit(): void {
+    this.form = TodoFormService.getCreateTodoForm();
+  }
+
+  onSubmit(): void {
+    Object.values(this.form.controls).forEach(control => control.markAsDirty());
+    this.submitEvent.emit(this.form);
   }
 
 }

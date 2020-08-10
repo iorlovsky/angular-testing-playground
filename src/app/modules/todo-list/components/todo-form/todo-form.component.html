@@ -1,1 +1,23 @@
-<p>todo-form works!</p>
+<form class="d-flex flex-column" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- Title -->
+  <label class="form-group">
+    <span>Title</span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter title"
+      formControlName="title">
+  </label>
+
+  <!-- Description -->
+  <label class="form-group">
+    <span>Description</span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter description"
+      formControlName="description">
+  </label>
+
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
