@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
+import { Todo } from '../../types';
 
 @Component({
   selector: 'app-todo',
@@ -6,11 +8,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./todo.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class TodoComponent {
+  @Input() todo: Todo;
 }
