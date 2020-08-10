@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../shared/shared.module';
+import { TodoComponent } from './components/todo/todo.component';
 import { TodoListComponent } from './pages/todo-list.component';
 import { TodoFormService } from './services/todo-form.service';
 import { TodoService } from './services/todo.service';
@@ -11,7 +12,7 @@ import { TodoListRoutingModule } from './todo-list-routing.module';
 import * as fromTodo from './todo.reducer';
 
 @NgModule({
-  declarations: [TodoListComponent],
+  declarations: [TodoListComponent, TodoComponent],
   imports: [
     CommonModule,
     TodoListRoutingModule,
