@@ -26,5 +26,9 @@
 
     <button type="submit" class="btn btn-primary">Save</button>
   </form>
+
+  <section class="col-12 col-md-6 col-lg-9">
+    <app-todo *ngFor="let todo of todos | async" [todo]="todo"></app-todo>
+  </section>
 </main>
 

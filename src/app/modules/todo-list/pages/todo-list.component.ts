@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
 import { TodoFormService } from '../services/todo-form.service';
 import { TodoService } from '../services/todo.service';
+import { Todo } from '../types';
 
 @Component({
   selector: 'app-todo-list',
@@ -14,9 +18,14 @@ export class TodoListComponent implements OnInit {
 
   form: FormGroup;
 
+  readonly todos: Observable<Todo[]>;
+
   constructor(
-    private todoService: TodoService
-  ) { }
+    private todoService: TodoService,
+    private store: Store<{ todos: Todo[] }>
+  ) {
+    this.todos = this.store.pipe(select('todos'));
+  }
 
   ngOnInit(): void {
     this.form = TodoFormService.getCreateTodoForm();
