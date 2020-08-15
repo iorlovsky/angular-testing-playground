@@ -22,12 +22,12 @@ export class AppComponent {
     private appRoutes: AppRoutes,
     private router: Router
   ) {
-    this.todoListUrl = appRoutes.todoList.asUrl();
-    this.boidsUrl = appRoutes.boids.asUrl();
+    this.todoListUrl = appRoutes.get('todoList').asUrl();
+    this.boidsUrl = appRoutes.get('boids').asUrl();
     this.canShowHeader$ = this.router.events
       .pipe(
         filter(isNavigationEnd),
-        map(event => event.url !== this.appRoutes.boids.asUrl())
+        map(event => event.url !== this.appRoutes.get('boids').asUrl())
       );
   }
 
