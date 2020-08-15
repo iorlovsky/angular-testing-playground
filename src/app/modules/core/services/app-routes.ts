@@ -1,17 +1,6 @@
 import { Injectable } from '@angular/core';
 
-class AppRoute {
-  constructor(private readonly route: string[]) {
-  }
-
-  asRoute(): string[] {
-    return this.route;
-  }
-
-  asUrl(): string {
-    return this.route.join('');
-  }
-}
+import { AppRoute } from '../models/app-route';
 
 @Injectable()
 export class AppRoutes {
