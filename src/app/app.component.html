@@ -1,15 +1,13 @@
-<header>
+<header *ngIf="canShowHeader$ | async">
   <h1> Testing Playground </h1>
+
+  <button class="btn btn-primary" [routerLink]="todoListUrl">
+    TODO List
+  </button>
+  <button class="btn btn-primary ml-3" [routerLink]="boidsUrl">
+    Boids
+  </button>
 </header>
 <main>
-  <section class="nav-buttons">
-    <button class="btn btn-primary" [routerLink]="todoListUrl">
-      TODO List
-    </button>
-    <button class="btn btn-primary ml-3" [routerLink]="boidsUrl">
-      Boids
-    </button>
-  </section>
-
   <router-outlet></router-outlet>
 </main>
