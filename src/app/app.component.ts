@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { AppRoutes } from './constants/routes';
+import { AppRoutes } from './modules/core/services/app-routes';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +9,14 @@ import { AppRoutes } from './constants/routes';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  readonly todoListRoute: string;
+  readonly todoListUrl: string;
+  readonly boidsUrl: string;
 
-  constructor() {
-    this.todoListRoute = AppRoutes.TodoList.join('');
+  constructor(
+    private appRoutes: AppRoutes
+  ) {
+    this.todoListUrl = appRoutes.todoList.asUrl();
+    this.boidsUrl = appRoutes.boids.asUrl();
   }
 
 }
