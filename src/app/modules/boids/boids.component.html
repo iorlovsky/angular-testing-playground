@@ -1,1 +1,6 @@
-<p>boids works!</p>
+<app-bird
+  *ngFor="let bird of birds; trackBy: identifyBird"
+  [bird]="bird"
+  [birdsAround]="birds"
+  (coordsUpdate)="onCoordsUpdate(bird.id, $event)">
+</app-bird>

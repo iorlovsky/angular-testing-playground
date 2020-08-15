@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  background: black;
+  border-radius: 50%;
+  /*border: 3px solid red;*/
+  will-change: transform;
+  box-sizing: border-box;
+}
