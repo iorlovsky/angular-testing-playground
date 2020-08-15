@@ -1,5 +1,14 @@
+:host {
+  display: flex;
+  height: 100%;
+}
+
 header {
   padding: 20px;
+}
+
+main {
+  width: 100%;
 }
 
 .nav-buttons {

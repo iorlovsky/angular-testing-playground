@@ -4,6 +4,10 @@
   --error-color: #dc3545;
 }
 
+html, body {
+  height: 100%;
+}
+
 h1, h2, h3 {
   font-weight: normal;
 }
