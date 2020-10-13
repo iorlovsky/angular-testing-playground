@@ -15,7 +15,6 @@ import { Flock } from './models/flock.model';
 export class BoidsComponent implements AfterViewInit {
 
   @ViewChildren(BoidComponent) birdComponents: QueryList<BoidComponent>;
-  birds: Boid[];
 
   readonly flock: Flock;
 
