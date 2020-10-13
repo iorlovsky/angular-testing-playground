@@ -5,7 +5,6 @@ import { Animator } from '../../models/animator';
 import { randomInteger } from '../../utils/common';
 import { BoidComponent } from './components/boid/boid.component';
 import { Boid } from './models/boid.model';
-import { Coords } from './types';
 
 @Component({
   selector: 'app-boids',
@@ -40,8 +39,8 @@ export class BoidsComponent implements AfterViewInit {
   }
 
   private generateBirds(): Boid[] {
-    const getX = () => randomInteger(0, this.document.documentElement.clientWidth - BoidComponent.DIAMETER);
-    const getY = () => randomInteger(0, this.document.documentElement.clientHeight - BoidComponent.DIAMETER);
+    const getX = () => randomInteger(0, this.document.documentElement.clientWidth - Boid.DIAMETER);
+    const getY = () => randomInteger(0, this.document.documentElement.clientHeight - Boid.DIAMETER);
     // tslint:disable-next-line:prefer-array-literal
     return new Array(this.birdsCount)
       .fill(undefined)
