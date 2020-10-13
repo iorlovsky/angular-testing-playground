@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { AppRouteName } from '../../../types/routes';
 import { AppRoute } from '../models/app-route';
-
-type AppRouteName = 'home'
-  | 'todoList'
-  | 'boids';
 
 @Injectable()
 export class AppRoutes {

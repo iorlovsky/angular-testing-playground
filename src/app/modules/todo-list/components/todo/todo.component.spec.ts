@@ -16,6 +16,11 @@ describe('TodoComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TodoComponent);
     component = fixture.componentInstance;
+    component.todo = {
+      title: 'do you',
+      description: 'still believe',
+      createdTime: new Date().toISOString()
+    };
     fixture.detectChanges();
   });
 

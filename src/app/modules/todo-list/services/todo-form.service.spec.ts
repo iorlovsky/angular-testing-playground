@@ -6,7 +6,11 @@ describe('TodoFormService', () => {
   let service: TodoFormService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        TodoFormService
+      ]
+    });
     service = TestBed.inject(TodoFormService);
   });
 
