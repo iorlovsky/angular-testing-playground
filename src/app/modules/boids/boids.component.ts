@@ -16,18 +16,31 @@ export class BoidsComponent implements AfterViewInit {
 
   @ViewChildren(BirdComponent) birdComponents: QueryList<BirdComponent>;
   birds: Bird[];
-  private readonly birdsCount: number = 2;
+  private readonly birdsCount: number = 3;
+  private readonly fps: number = 60;
+  private readonly fpsTime: number;
 
   constructor(
     @Inject(DOCUMENT) private document: Document
   ) {
+    // tslint:disable-next-line:no-magic-numbers
+    this.fpsTime = 1000 / this.fps;
     this.birds = this.generateBirds();
+    // this.birds[0].setCoords({ x: 1000, y: 50 });
+    // this.birds[1].setCoords({ x: 1000, y: 500 });
+    // this.birds[2].setCoords({ x: 1000, y: 50 });
   }
 
   ngAfterViewInit(): void {
-    const animate = () => {
+    let lastAnimationTime = performance.now();
+    const animate = (timestamp: number) => {
       requestAnimationFrame(animate);
-      this.birdComponents.forEach(bird => bird.move());
+      const elapsedTime = timestamp - lastAnimationTime;
+      if (elapsedTime <= this.fpsTime) {
+        return;
+      }
+      this.birdComponents.forEach(bird => bird.start());
+      lastAnimationTime = timestamp - (elapsedTime % this.fpsTime);
     };
     requestAnimationFrame(animate);
   }
