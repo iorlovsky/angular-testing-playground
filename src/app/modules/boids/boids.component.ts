@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, QueryList, ViewChildren } from '@angular/core';
 
+import { Animator } from '../../models/animator';
 import { randomInteger } from '../../utils/common';
 import { BoidComponent } from './components/boid/boid.component';
 import { Boid } from './models/boid.model';
@@ -29,17 +30,12 @@ export class BoidsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    let lastAnimationTime = performance.now();
-    const animate = (timestamp: number) => {
-      requestAnimationFrame(animate);
-      const elapsedTime = timestamp - lastAnimationTime;
-      if (elapsedTime <= this.fpsTime) {
-        return;
-      }
+    // Find out whether the performance object works in every browser.
+    const animator = new Animator(performance);
+    const animationFn = () => {
       this.birdComponents.forEach(bird => bird.start());
-      lastAnimationTime = timestamp - (elapsedTime % this.fpsTime);
     };
-    requestAnimationFrame(animate);
+    animator.animate(animationFn, this.fps);
   }
 
   identifyBird(idx: number, bird: Boid): number {
