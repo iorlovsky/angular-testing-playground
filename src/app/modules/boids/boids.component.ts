@@ -19,13 +19,10 @@ export class BoidsComponent implements AfterViewInit {
   birds: Boid[];
   private readonly birdsCount: number = 10;
   private readonly fps: number = 60;
-  private readonly fpsTime: number;
 
   constructor(
     @Inject(DOCUMENT) private document: Document
   ) {
-    // tslint:disable-next-line:no-magic-numbers
-    this.fpsTime = 1000 / this.fps;
     this.birds = this.generateBirds();
   }
 
