@@ -3,12 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   Inject,
   Input,
   OnChanges,
   OnInit,
-  Output,
   Renderer2, SimpleChanges
 } from '@angular/core';
 
@@ -30,10 +28,7 @@ export class BoidComponent implements OnInit, OnChanges {
 
   @Input() boid: Boid;
   @Input() birdsAround: Boid[];
-  @Output() coordsUpdate: EventEmitter<Coords> = new EventEmitter<Coords>();
 
-  private target: Coords;
-  private coords: Coords;
   private safePoint: Coords;
 
   constructor(
@@ -50,13 +45,13 @@ export class BoidComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('birdsAround' in changes) {
-      this.target = Flock.getCenter(this.birdsAround);
+      this.boid.setTarget(Flock.getCenter(this.birdsAround));
       this.safePoint = Flock.getSafePoint(this.boid, this.birdsAround, BoidComponent.SAFE_DISTANCE);
     }
   }
 
   start(): void {
-    if (this.coords && this.target) {
+    if (this.boid.hasTarget()) {
       this.move();
     }
   }
@@ -70,19 +65,19 @@ export class BoidComponent implements OnInit, OnChanges {
   }
 
   private getPositionForCoherence(): Coords {
-    const { x: targetX, y: targetY } = this.target;
-    const { x: currentX, y: currentY } = this.coords;
+    const { x: targetX, y: targetY } = this.boid.getTarget();
+    const { x: currentX, y: currentY } = this.boid.getCoords();
     let unsignedNextX = 0;
     let unsignedNextY = 0;
-    const isInTargetArea = isInsideRadius(this.target, this.coords, BoidComponent.SPEED);
+    const isInTargetArea = isInsideRadius(this.boid.getTarget(), this.boid.getCoords(), BoidComponent.SPEED);
     if (isInTargetArea) {
       return { x: targetX - currentX, y: targetY - currentY };
     }
     if (Math.abs((targetY - currentY) / (targetX - currentX)) < 1) {
       unsignedNextX = BoidComponent.SPEED;
-      unsignedNextY = BoidComponent.SPEED * correctVelocity(this.coords, this.target, 'y');
+      unsignedNextY = BoidComponent.SPEED * correctVelocity(this.boid.getCoords(), this.boid.getTarget(), 'y');
     } else {
-      unsignedNextX = BoidComponent.SPEED * correctVelocity(this.coords, this.target, 'x');
+      unsignedNextX = BoidComponent.SPEED * correctVelocity(this.boid.getCoords(), this.boid.getTarget(), 'x');
       unsignedNextY = BoidComponent.SPEED;
     }
     const nextX = unsignedNextX * (currentX <= targetX  ? 1 : -1);
@@ -100,7 +95,7 @@ export class BoidComponent implements OnInit, OnChanges {
   }
 
   private combineRules(coherence: Coords, separation: Coords): Coords {
-    const { x: currentX, y: currentY } = this.coords;
+    const { x: currentX, y: currentY } = this.boid.getCoords();
     // tslint:disable:prefer-const
     let nextX = currentX + coherence.x;
     let nextY = currentY + coherence.y;
@@ -117,12 +112,11 @@ export class BoidComponent implements OnInit, OnChanges {
   }
 
   private setCoordsAndChangePosition(x: number, y: number): void {
-    this.coords = { x, y };
-    this.coordsUpdate.emit(this.coords);
+    this.boid.setCoords({ x, y });
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       'transform',
-      `translate(${this.coords.x}px, ${this.coords.y}px)`
+      `translate(${x}px, ${y}px)`
     );
   }
 }

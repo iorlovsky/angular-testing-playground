@@ -39,16 +39,6 @@ export class BoidsComponent implements AfterViewInit {
     return bird.id;
   }
 
-  onCoordsUpdate(id: number, coords: Coords): void {
-    const birdToUpdate = this.birds.find(bird => bird.id === id);
-    this.birds = this.birds.map((bird) => {
-      if (bird.id === birdToUpdate?.id) {
-        return new Boid(bird.id, coords);
-      }
-      return bird;
-    });
-  }
-
   private generateBirds(): Boid[] {
     const getX = () => randomInteger(0, this.document.documentElement.clientWidth - BoidComponent.DIAMETER);
     const getY = () => randomInteger(0, this.document.documentElement.clientHeight - BoidComponent.DIAMETER);

@@ -2,6 +2,5 @@
   *ngFor="let bird of birds; trackBy: identifyBird"
   class="position-absolute"
   [boid]="bird"
-  [birdsAround]="birds"
-  (coordsUpdate)="onCoordsUpdate(bird.id, $event)">
+  [birdsAround]="birds">
 </app-boid>
