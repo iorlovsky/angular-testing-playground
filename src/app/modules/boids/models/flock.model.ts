@@ -1,8 +1,16 @@
+import { randomInteger } from '../../../utils/common';
 import { Coords } from '../types';
 import { isInsideRadius } from '../utils/utils';
 import { Boid } from './boid.model';
 
+type CoordinateRange = {
+  from: number,
+  to: number
+};
+
 export class Flock {
+  boids: Boid[] = [];
+  private boidsCount: number;
 
   static getCenter(birds: Boid[]): Coords {
     const xSum = birds.reduce<number>((sum, bird) => sum + bird.getCoords().x, 0);
@@ -27,5 +35,18 @@ export class Flock {
     return birdsAround.filter((validatableBird) => {
       return isInsideRadius(bird.getCoords(), validatableBird.getCoords(), radius);
     });
+  }
+
+  setBoidsCount(count: number): void {
+    this.boidsCount = count;
+  }
+
+  generateBoids(xRange: CoordinateRange, yRange: CoordinateRange): void {
+    const getX = () => randomInteger(xRange.from, xRange.to);
+    const getY = () => randomInteger(yRange.from, yRange.to);
+    // tslint:disable-next-line:prefer-array-literal
+    this.boids = new Array(this.boidsCount)
+      .fill(undefined)
+      .map((_, index) => new Boid(index, { x: getX(), y: getY() }));
   }
 }

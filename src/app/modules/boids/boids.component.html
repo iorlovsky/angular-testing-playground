@@ -1,6 +1,6 @@
 <app-boid
-  *ngFor="let bird of birds; trackBy: identifyBird"
+  *ngFor="let boid of flock.boids; trackBy: identifyBoid"
   class="position-absolute"
-  [boid]="bird"
-  [birdsAround]="birds">
+  [boid]="boid"
+  [birdsAround]="flock.boids">
 </app-boid>
