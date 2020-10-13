@@ -1,6 +1,6 @@
 import { Coords } from '../types';
 
-export class Bird {
+export class Boid {
 
   constructor(
     readonly id: number,

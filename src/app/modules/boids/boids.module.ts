@@ -4,10 +4,10 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { BoidsRoutingModule } from './boids-routing.module';
 import { BoidsComponent } from './boids.component';
-import { BirdComponent } from './components/bird/bird.component';
+import { BoidComponent } from './components/boid/boid.component';
 
 @NgModule({
-  declarations: [BoidsComponent, BirdComponent],
+  declarations: [BoidsComponent, BoidComponent],
   imports: [
     CommonModule,
     BoidsRoutingModule,

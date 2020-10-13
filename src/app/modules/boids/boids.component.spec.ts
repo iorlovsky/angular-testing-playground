@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BoidsComponent } from './boids.component';
-import { BirdComponent } from './components/bird/bird.component';
+import { BoidComponent } from './components/boid/boid.component';
 
 describe('BoidsComponent', () => {
   let component: BoidsComponent;
@@ -11,7 +11,7 @@ describe('BoidsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         BoidsComponent,
-        BirdComponent
+        BoidComponent
       ]
     })
       .compileComponents();

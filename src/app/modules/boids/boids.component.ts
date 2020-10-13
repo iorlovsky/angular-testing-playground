@@ -2,8 +2,8 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, QueryList, ViewChildren } from '@angular/core';
 
 import { randomInteger } from '../../utils/common';
-import { BirdComponent } from './components/bird/bird.component';
-import { Bird } from './models/bird.model';
+import { BoidComponent } from './components/boid/boid.component';
+import { Boid } from './models/boid.model';
 import { Coords } from './types';
 
 @Component({
@@ -14,9 +14,9 @@ import { Coords } from './types';
 })
 export class BoidsComponent implements AfterViewInit {
 
-  @ViewChildren(BirdComponent) birdComponents: QueryList<BirdComponent>;
-  birds: Bird[];
-  private readonly birdsCount: number = 3;
+  @ViewChildren(BoidComponent) birdComponents: QueryList<BoidComponent>;
+  birds: Boid[];
+  private readonly birdsCount: number = 10;
   private readonly fps: number = 60;
   private readonly fpsTime: number;
 
@@ -26,9 +26,6 @@ export class BoidsComponent implements AfterViewInit {
     // tslint:disable-next-line:no-magic-numbers
     this.fpsTime = 1000 / this.fps;
     this.birds = this.generateBirds();
-    // this.birds[0].setCoords({ x: 1000, y: 50 });
-    // this.birds[1].setCoords({ x: 1000, y: 500 });
-    // this.birds[2].setCoords({ x: 1000, y: 50 });
   }
 
   ngAfterViewInit(): void {
@@ -45,7 +42,7 @@ export class BoidsComponent implements AfterViewInit {
     requestAnimationFrame(animate);
   }
 
-  identifyBird(idx: number, bird: Bird): number {
+  identifyBird(idx: number, bird: Boid): number {
     return bird.id;
   }
 
@@ -53,18 +50,18 @@ export class BoidsComponent implements AfterViewInit {
     const birdToUpdate = this.birds.find(bird => bird.id === id);
     this.birds = this.birds.map((bird) => {
       if (bird.id === birdToUpdate?.id) {
-        return new Bird(bird.id, coords);
+        return new Boid(bird.id, coords);
       }
       return bird;
     });
   }
 
-  private generateBirds(): Bird[] {
-    const getX = () => randomInteger(0, this.document.documentElement.clientWidth - BirdComponent.DIAMETER);
-    const getY = () => randomInteger(0, this.document.documentElement.clientHeight - BirdComponent.DIAMETER);
+  private generateBirds(): Boid[] {
+    const getX = () => randomInteger(0, this.document.documentElement.clientWidth - BoidComponent.DIAMETER);
+    const getY = () => randomInteger(0, this.document.documentElement.clientHeight - BoidComponent.DIAMETER);
     // tslint:disable-next-line:prefer-array-literal
     return new Array(this.birdsCount)
       .fill(undefined)
-      .map((_, index) => new Bird(index, { x: getX(), y: getY() }));
+      .map((_, index) => new Boid(index, { x: getX(), y: getY() }));
   }
 }

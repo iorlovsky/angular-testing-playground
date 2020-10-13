@@ -12,24 +12,24 @@ import {
   Renderer2, SimpleChanges
 } from '@angular/core';
 
-import { Bird } from '../../models/bird.model';
+import { Boid } from '../../models/boid.model';
 import { Flock } from '../../models/flock.model';
 import { Coords } from '../../types';
 import { correctVelocity, isInsideRadius } from '../../utils/utils';
 
 @Component({
-  selector: 'app-bird',
-  templateUrl: './bird.component.html',
-  styleUrls: ['./bird.component.css'],
+  selector: 'app-boid',
+  templateUrl: './boid.component.html',
+  styleUrls: ['./boid.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BirdComponent implements OnInit, OnChanges {
+export class BoidComponent implements OnInit, OnChanges {
   static readonly DIAMETER: number = 30;
   static readonly SPEED: number = 5;
   static readonly SAFE_DISTANCE: number = 50;
 
-  @Input() bird: Bird;
-  @Input() birdsAround: Bird[];
+  @Input() boid: Boid;
+  @Input() birdsAround: Boid[];
   @Output() coordsUpdate: EventEmitter<Coords> = new EventEmitter<Coords>();
 
   private target: Coords;
@@ -44,14 +44,14 @@ export class BirdComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    const { x, y } = this.bird.getCoords();
+    const { x, y } = this.boid.getCoords();
     this.setCoordsAndChangePosition(x, y);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('birdsAround' in changes) {
       this.target = Flock.getCenter(this.birdsAround);
-      this.safePoint = Flock.getSafePoint(this.bird, this.birdsAround, BirdComponent.SAFE_DISTANCE);
+      this.safePoint = Flock.getSafePoint(this.boid, this.birdsAround, BoidComponent.SAFE_DISTANCE);
     }
   }
 
@@ -74,16 +74,16 @@ export class BirdComponent implements OnInit, OnChanges {
     const { x: currentX, y: currentY } = this.coords;
     let unsignedNextX = 0;
     let unsignedNextY = 0;
-    const isInTargetArea = isInsideRadius(this.target, this.coords, BirdComponent.SPEED);
+    const isInTargetArea = isInsideRadius(this.target, this.coords, BoidComponent.SPEED);
     if (isInTargetArea) {
       return { x: targetX - currentX, y: targetY - currentY };
     }
     if (Math.abs((targetY - currentY) / (targetX - currentX)) < 1) {
-      unsignedNextX = BirdComponent.SPEED;
-      unsignedNextY = BirdComponent.SPEED * correctVelocity(this.coords, this.target, 'y');
+      unsignedNextX = BoidComponent.SPEED;
+      unsignedNextY = BoidComponent.SPEED * correctVelocity(this.coords, this.target, 'y');
     } else {
-      unsignedNextX = BirdComponent.SPEED * correctVelocity(this.coords, this.target, 'x');
-      unsignedNextY = BirdComponent.SPEED;
+      unsignedNextX = BoidComponent.SPEED * correctVelocity(this.coords, this.target, 'x');
+      unsignedNextY = BoidComponent.SPEED;
     }
     const nextX = unsignedNextX * (currentX <= targetX  ? 1 : -1);
     const nextY = unsignedNextY * (currentY <= targetY ? 1 : -1);
@@ -96,7 +96,7 @@ export class BirdComponent implements OnInit, OnChanges {
     // const nextX = (targetX - currentX) * BirdComponent.SPEED;
     // const nextY = (targetY - currentY) * BirdComponent.SPEED;
     // return { x: nextX, y: nextY };
-    return { x: this.safePoint.x * BirdComponent.SPEED, y: this.safePoint.y * BirdComponent.SPEED };
+    return { x: this.safePoint.x * BoidComponent.SPEED, y: this.safePoint.y * BoidComponent.SPEED };
   }
 
   private combineRules(coherence: Coords, separation: Coords): Coords {
