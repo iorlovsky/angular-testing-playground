@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 :host {
   display: flex;
@@ -14,6 +15,31 @@
     &__boid {
       position: absolute;
       z-index: $boid-z-index;
+    }
+  }
+
+  .controls {
+    height: 150px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: calc(#{$boid-z-index} + 1);
+    display: flex;
+    align-items: center;
+    padding: 20px;
+
+    &__button {
+      @include reset-button;
+      height: 40px;
+      font-size: 20px;
+      font-weight: 500;
+      color: $boids-font-color;
+      border: 1px solid $boids-font-color;
+      border-radius: 1px;
+
+      &:hover {
+        background-color: rgba($boids-font-color, 0.05);
+      }
     }
   }
 }

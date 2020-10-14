@@ -41,7 +41,7 @@ export class BoidsComponent implements AfterViewInit {
     // Find out whether the performance object works in every browser.
     const animator = new Animator(performance);
     const animationFn = () => {
-      this.birdComponents.forEach(bird => bird.start());
+      // this.birdComponents.forEach(bird => bird.start());
     };
     animator.animate(animationFn, this.fps);
   }
