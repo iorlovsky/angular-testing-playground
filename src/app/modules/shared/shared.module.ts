@@ -2,16 +2,18 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { SvgLineDirective } from './directives/svg-line/svg-line.directive';
+import { RepeatDirective } from './directives/repeat/repeat.directive';
+import { SvgAttributesDirective } from './directives/svg-line/svg-attributes.directive';
 
 @NgModule({
-  declarations: [SvgLineDirective],
+  declarations: [SvgAttributesDirective, RepeatDirective],
   imports: [
     CommonModule
   ],
   exports: [
     ReactiveFormsModule,
-    SvgLineDirective
+    SvgAttributesDirective,
+    RepeatDirective
   ]
 })
 export class SharedModule { }
