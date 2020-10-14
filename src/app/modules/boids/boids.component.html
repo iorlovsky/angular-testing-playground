@@ -1,8 +1,12 @@
-<app-boid
-  *ngFor="let boid of flock.boids; trackBy: identifyBoid"
-  class="position-absolute"
-  [boid]="boid"
-  [birdsAround]="flock.boids">
-</app-boid>
-<app-grid>
+<section class="boids__container">
+  <app-boid
+    *ngFor="let boid of flock.boids; trackBy: identifyBoid"
+    class="boids__boid"
+    [boid]="boid"
+    [birdsAround]="flock.boids">
+  </app-boid>
+</section>
+
+<app-grid
+  [step]="50">
 </app-grid>

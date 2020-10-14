@@ -9,7 +9,7 @@ import { Flock } from './models/flock.model';
 @Component({
   selector: 'app-boids',
   templateUrl: './boids.component.html',
-  styleUrls: ['./boids.component.css'],
+  styleUrls: ['./boids.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoidsComponent implements AfterViewInit {
