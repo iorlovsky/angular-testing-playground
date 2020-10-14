@@ -1,10 +1,17 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnDestroy, QueryList, ViewChildren } from '@angular/core';
+
+import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
+import { map, takeUntil, withLatestFrom } from 'rxjs/operators';
 
 import { Animator } from '../../models/animator';
+import { BoidsState } from './boids.reducer';
+import { selectIsDebugEnabled } from './boids.selectors';
 import { BoidComponent } from './components/boid/boid.component';
 import { Boid } from './models/boid.model';
 import { Flock } from './models/flock.model';
+import { BoidsService } from './services/boids/boids.service';
 
 @Component({
   selector: 'app-boids',
@@ -12,7 +19,7 @@ import { Flock } from './models/flock.model';
   styleUrls: ['./boids.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoidsComponent implements AfterViewInit {
+export class BoidsComponent implements AfterViewInit, OnDestroy {
 
   @ViewChildren(BoidComponent) birdComponents: QueryList<BoidComponent>;
 
@@ -20,9 +27,13 @@ export class BoidsComponent implements AfterViewInit {
 
   private boidsCount: number = 10;
   private readonly fps: number = 60;
+  private readonly debugButtonClicks$: Subject<void> = new Subject<void>();
+  private readonly destroyed$: Subject<void> = new Subject<void>();
 
   constructor(
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private boidsService: BoidsService,
+    private store: Store<{ boids: BoidsState }>
   ) {
     this.flock = new Flock();
     this.flock.setBoidsCount(this.boidsCount);
@@ -35,6 +46,7 @@ export class BoidsComponent implements AfterViewInit {
       to: this.document.documentElement.clientHeight - Boid.DIAMETER
     };
     this.flock.generateBoids(xRange, yRange);
+    this.listenToDebugButtonClicks();
   }
 
   ngAfterViewInit(): void {
@@ -46,7 +58,33 @@ export class BoidsComponent implements AfterViewInit {
     animator.animate(animationFn, this.fps);
   }
 
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+    this.debugButtonClicks$.complete();
+  }
+
   identifyBoid(idx: number, boid: Boid): number {
     return boid.id;
+  }
+
+  onDebugButtonClick(): void {
+    this.debugButtonClicks$.next();
+  }
+
+  private listenToDebugButtonClicks(): void {
+    this.debugButtonClicks$
+      .pipe(
+        withLatestFrom(this.store.select(selectIsDebugEnabled)),
+        map(([, isEnabled]) => isEnabled),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe((isEnabled) => {
+        if (isEnabled) {
+          this.boidsService.disableDebug();
+        } else {
+          this.boidsService.enableDebug();
+        }
+      });
   }
 }
