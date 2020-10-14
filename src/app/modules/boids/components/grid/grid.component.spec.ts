@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { SharedModule } from '../../../shared/shared.module';
 import { GridComponent } from './grid.component';
 
 describe('GridComponent', () => {
@@ -8,7 +9,12 @@ describe('GridComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GridComponent]
+      declarations: [
+        GridComponent,
+      ],
+      imports: [
+        SharedModule
+      ]
     })
       .compileComponents();
   }));

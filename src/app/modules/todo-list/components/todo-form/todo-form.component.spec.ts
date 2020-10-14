@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 
+import { SharedModule } from '../../../shared/shared.module';
 import { TodoFormComponent } from './todo-form.component';
 
 describe('TodoFormComponent', () => {
@@ -13,7 +13,7 @@ describe('TodoFormComponent', () => {
         TodoFormComponent
       ],
       imports: [
-        ReactiveFormsModule
+        SharedModule
       ]
     })
       .compileComponents();

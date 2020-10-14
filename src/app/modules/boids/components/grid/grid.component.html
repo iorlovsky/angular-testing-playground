@@ -2,17 +2,17 @@
   <ng-container *ngFor="let line of lines.vertical">
     <line
       appSvgAttributes
-      [attributes]="{ x1: line.x, y1: 0, x2: line.x, y2: line.y }"
+      [svgAttributes]="{ x1: line.x, y1: 0, x2: line.x, y2: line.y }"
       stroke="black">
     </line>
-    <text appSvgAttributes [attributes]="{ x: line.x + 1, y: 10 }" class="small">{{ line.x }}</text>
+    <text appSvgAttributes [svgAttributes]="{ x: line.x + 1, y: 10 }" class="small">{{ line.x }}</text>
   </ng-container>
   <ng-container *ngFor="let line of lines.horizontal">
     <line
       appSvgAttributes
-      [attributes]="{ x1: 0, y1: line.y, x2: line.x, y2: line.y }"
+      [svgAttributes]="{ x1: 0, y1: line.y, x2: line.x, y2: line.y }"
       stroke="black">
     </line>
-    <text appSvgAttributes [attributes]="{ x: 1, y: line.y + 11 }" class="small">{{ line.y }}</text>
+    <text appSvgAttributes [svgAttributes]="{ x: 1, y: line.y + 11 }" class="small">{{ line.y }}</text>
   </ng-container>
 </svg>

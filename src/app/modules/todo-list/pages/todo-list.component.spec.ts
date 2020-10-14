@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { provideMockStore } from '@ngrx/store/testing';
 
+import { SharedModule } from '../../shared/shared.module';
 import { TodoFormComponent } from '../components/todo-form/todo-form.component';
 import { TodoService } from '../services/todo.service';
 import { MockTodoService } from '../services/todo.service.mock';
@@ -16,6 +17,9 @@ describe('TodoListComponent', () => {
       declarations: [
         TodoListComponent,
         TodoFormComponent
+      ],
+      imports: [
+        SharedModule
       ],
       providers: [
         { provide: TodoService, useClass: MockTodoService },

@@ -5,7 +5,7 @@ import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular
 })
 export class SvgAttributesDirective implements OnChanges {
   // tslint:disable-next-line:no-any
-  @Input() attributes: { [key: string]: any };
+  @Input() svgAttributes: { [key: string]: any };
 
   constructor(
     private elementRef: ElementRef<Element>
@@ -13,8 +13,8 @@ export class SvgAttributesDirective implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('attributes' in changes) {
-      Object.entries(this.attributes)
+    if ('svgAttributes' in changes) {
+      Object.entries(this.svgAttributes)
         .forEach(([attribute, value]) => {
           this.elementRef.nativeElement.setAttributeNS(null, attribute, value);
         });
