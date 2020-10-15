@@ -1,3 +1,4 @@
+import { transition, trigger, useAnimation } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 
@@ -6,6 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, withLatestFrom } from 'rxjs/operators';
 
 import { Animator } from '../../../../models/animator';
+import { topSlideIn, topSlideOut } from '../../../core/animations';
 import { BoidsState } from '../../boids.reducer';
 import { selectIsDebugEnabled } from '../../boids.selectors';
 import { BoidComponent } from '../../components/boid/boid.component';
@@ -17,7 +19,15 @@ import { BoidsService } from '../../services/boids/boids.service';
   selector: 'app-boids',
   templateUrl: './boids.component.html',
   styleUrls: ['./boids.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('slideInOut', [
+      // tslint:disable:no-magic-numbers
+      transition('void => *', useAnimation(topSlideIn(150))),
+      transition('* => void', useAnimation(topSlideOut(150)))
+      // tslint:enable:no-magic-numbers
+    ])
+  ]
 })
 export class BoidsComponent implements AfterViewInit, OnDestroy {
 

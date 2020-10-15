@@ -1,6 +1,16 @@
 @import "src/assets/styles/variables";
 @import "src/assets/styles/mixins";
 
+@mixin panel {
+  height: 150px;
+  width: 100%;
+  position: absolute;
+  z-index: calc(#{$boid-z-index} + 1);
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
 :host {
   display: flex;
   height: 100vh;
@@ -19,14 +29,8 @@
   }
 
   .controls {
-    height: 150px;
-    width: 100%;
-    position: absolute;
+    @include panel;
     bottom: 0;
-    z-index: calc(#{$boid-z-index} + 1);
-    display: flex;
-    align-items: center;
-    padding: 20px;
 
     @include media-breakpoint-down(sm) {
       justify-content: center;
@@ -45,5 +49,10 @@
         background-color: rgba($boids-font-color, 0.05);
       }
     }
+  }
+
+  .debug {
+    @include panel;
+    background: rgba($boids-font-color, 0.5);
   }
 }

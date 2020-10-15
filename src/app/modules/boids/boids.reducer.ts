@@ -7,7 +7,7 @@ export type BoidsState = {
 };
 
 export const initialState: BoidsState = {
-  isDebugEnabled: false
+  isDebugEnabled: true
 };
 
 const _boidsReducer = createReducer(

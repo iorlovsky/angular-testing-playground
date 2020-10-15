@@ -1,3 +1,7 @@
+<section class="debug" *ngIf="isDebugEnabled$ | async" [@slideInOut]>
+  <app-debug></app-debug>
+</section>
+
 <section class="boids__container">
   <app-boid
     *ngFor="let boid of flock.boids; trackBy: identifyBoid"
@@ -6,6 +10,7 @@
     [birdsAround]="flock.boids">
   </app-boid>
 </section>
+
 <section class="controls">
   <button class="controls__button" (click)="onDebugButtonClick()">
     <ng-container *ngIf="isDebugEnabled$ | async">Disable </ng-container>
