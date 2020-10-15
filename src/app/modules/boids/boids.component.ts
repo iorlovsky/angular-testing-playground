@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, withLatestFrom } from 'rxjs/operators';
 
 import { Animator } from '../../models/animator';
@@ -24,6 +24,7 @@ export class BoidsComponent implements AfterViewInit, OnDestroy {
   @ViewChildren(BoidComponent) birdComponents: QueryList<BoidComponent>;
 
   readonly flock: Flock;
+  readonly isDebugEnabled$: Observable<boolean>;
 
   private boidsCount: number = 10;
   private readonly fps: number = 60;
@@ -35,6 +36,7 @@ export class BoidsComponent implements AfterViewInit, OnDestroy {
     private boidsService: BoidsService,
     private store: Store<{ boids: BoidsState }>
   ) {
+    this.isDebugEnabled$ = this.store.select(selectIsDebugEnabled);
     this.flock = new Flock();
     this.flock.setBoidsCount(this.boidsCount);
     const xRange = {
@@ -75,7 +77,7 @@ export class BoidsComponent implements AfterViewInit, OnDestroy {
   private listenToDebugButtonClicks(): void {
     this.debugButtonClicks$
       .pipe(
-        withLatestFrom(this.store.select(selectIsDebugEnabled)),
+        withLatestFrom(this.isDebugEnabled$),
         map(([, isEnabled]) => isEnabled),
         takeUntil(this.destroyed$)
       )
