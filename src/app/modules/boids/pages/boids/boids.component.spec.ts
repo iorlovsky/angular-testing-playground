@@ -2,11 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { provideMockStore } from '@ngrx/store/testing';
 
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
+import { BoidComponent } from '../../components/boid/boid.component';
+import { GridComponent } from '../../components/grid/grid.component';
+import { provideMockBoidsService } from '../../services/boids/boids.service.mock';
 import { BoidsComponent } from './boids.component';
-import { BoidComponent } from './components/boid/boid.component';
-import { GridComponent } from './components/grid/grid.component';
-import { provideMockBoidsService } from './services/boids/boids.service.mock';
 
 describe('BoidsComponent', () => {
   let component: BoidsComponent;

@@ -5,13 +5,13 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, withLatestFrom } from 'rxjs/operators';
 
-import { Animator } from '../../models/animator';
-import { BoidsState } from './boids.reducer';
-import { selectIsDebugEnabled } from './boids.selectors';
-import { BoidComponent } from './components/boid/boid.component';
-import { Boid } from './models/boid.model';
-import { Flock } from './models/flock.model';
-import { BoidsService } from './services/boids/boids.service';
+import { Animator } from '../../../../models/animator';
+import { BoidsState } from '../../boids.reducer';
+import { selectIsDebugEnabled } from '../../boids.selectors';
+import { BoidComponent } from '../../components/boid/boid.component';
+import { Boid } from '../../models/boid.model';
+import { Flock } from '../../models/flock.model';
+import { BoidsService } from '../../services/boids/boids.service';
 
 @Component({
   selector: 'app-boids',

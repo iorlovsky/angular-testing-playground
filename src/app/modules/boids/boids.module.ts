@@ -5,10 +5,10 @@ import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../shared/shared.module';
 import { BoidsRoutingModule } from './boids-routing.module';
-import { BoidsComponent } from './boids.component';
 import * as fromBoids from './boids.reducer';
 import { BoidComponent } from './components/boid/boid.component';
 import { GridComponent } from './components/grid/grid.component';
+import { BoidsComponent } from './pages/boids/boids.component';
 
 @NgModule({
   declarations: [BoidsComponent, BoidComponent, GridComponent],
