@@ -1,1 +1,9 @@
-<p>debug works!</p>
+<form class="d-flex form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset class="d-flex form__fieldset">
+    <label class="d-flex form__label">
+      <input type="checkbox" class="form__checkbox" formControlName="show_grid">
+      <span>Grid</span>
+    </label>
+  </fieldset>
+
+</form>
