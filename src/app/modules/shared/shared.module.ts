@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { RepeatDirective } from './directives/repeat/repeat.directive';
-import { SvgAttributesDirective } from './directives/svg-line/svg-attributes.directive';
+import { SvgAttributesDirective } from './directives/svg-attributes/svg-attributes.directive';
 
 @NgModule({
   declarations: [SvgAttributesDirective, RepeatDirective],
