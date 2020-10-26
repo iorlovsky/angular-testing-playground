@@ -44,7 +44,7 @@ export class BoidComponent implements OnInit, OnChanges {
     }
   }
 
-  start(): void {
+  makeStep(): void {
     if (this.boid.hasTarget()) {
       this.move();
     }

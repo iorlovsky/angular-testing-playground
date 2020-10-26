@@ -65,7 +65,7 @@ export class BoidsComponent implements AfterViewInit, OnDestroy {
     // Find out whether the performance object works in every browser.
     const animator = new Animator(performance);
     const animationFn = () => {
-      // this.boidComponents.forEach(boid => boid.start());
+      // this.boidComponents.forEach(boid => boid.makeStep());
     };
     animator.animate(animationFn, this.fps);
   }
