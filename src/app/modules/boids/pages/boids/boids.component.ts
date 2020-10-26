@@ -31,7 +31,7 @@ import { BoidsService } from '../../services/boids/boids.service';
 })
 export class BoidsComponent implements AfterViewInit, OnDestroy {
 
-  @ViewChildren(BoidComponent) birdComponents: QueryList<BoidComponent>;
+  @ViewChildren(BoidComponent) boidComponents: QueryList<BoidComponent>;
 
   readonly flock: Flock;
   readonly isDebugEnabled$: Observable<boolean>;
@@ -65,7 +65,7 @@ export class BoidsComponent implements AfterViewInit, OnDestroy {
     // Find out whether the performance object works in every browser.
     const animator = new Animator(performance);
     const animationFn = () => {
-      // this.birdComponents.forEach(bird => bird.start());
+      // this.boidComponents.forEach(boid => boid.start());
     };
     animator.animate(animationFn, this.fps);
   }

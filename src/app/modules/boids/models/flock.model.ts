@@ -12,28 +12,28 @@ export class Flock {
   boids: Boid[] = [];
   private boidsCount: number;
 
-  static getCenter(birds: Boid[]): Coords {
-    const xSum = birds.reduce<number>((sum, bird) => sum + bird.getCoords().x, 0);
-    const ySum = birds.reduce<number>((sum, bird) => sum + bird.getCoords().y, 0);
-    return { x: xSum / birds.length, y: ySum / birds.length };
+  static getCenter(boids: Boid[]): Coords {
+    const xSum = boids.reduce<number>((sum, boid) => sum + boid.getCoords().x, 0);
+    const ySum = boids.reduce<number>((sum, boid) => sum + boid.getCoords().y, 0);
+    return { x: xSum / boids.length, y: ySum / boids.length };
   }
 
-  // static getSafePoint(self: Bird, birdsAround: Bird[], radius: number): Coords {
-  //   const birdsInsideRadius = Flock.getBirdsInsideRadius(self, birdsAround, radius)/*.filter(bird => bird.id !== self.id)*/;
-  //   return Flock.getCenter(birdsInsideRadius);
+  // static getSafePoint(self: Boid, boidsAround: Boid[], radius: number): Coords {
+  //   const boidsInsideRadius = Flock.getBirdsInsideRadius(self, boidsAround, radius)/*.filter(boid => boid.id !== self.id)*/;
+  //   return Flock.getCenter(boidsInsideRadius);
   // }
 
-  static getSafePoint(self: Boid, birdsAround: Boid[], radius: number): Coords {
-    const birdsInsideRadius = Flock.getBirdsInsideRadius(self, birdsAround, radius).filter(bird => bird.id !== self.id);
-    const xSum = birdsInsideRadius.reduce<number>((sum, bird) => sum + bird.getCoords().x - self.getCoords().x, 0);
-    const ySum = birdsInsideRadius.reduce<number>((sum, bird) => sum + bird.getCoords().y - self.getCoords().y, 0);
-    return { x: xSum /*/ birdsInsideRadius.length*/, y: ySum /*/ birdsInsideRadius.length*/ };
-    // return Flock.getCenter(birdsInsideRadius);
+  static getSafePoint(self: Boid, boidsAround: Boid[], radius: number): Coords {
+    const boidsInsideRadius = Flock.getBoidsInsideRadius(self, boidsAround, radius).filter(boid => boid.id !== self.id);
+    const xSum = boidsInsideRadius.reduce<number>((sum, boid) => sum + boid.getCoords().x - self.getCoords().x, 0);
+    const ySum = boidsInsideRadius.reduce<number>((sum, boid) => sum + boid.getCoords().y - self.getCoords().y, 0);
+    return { x: xSum /*/ boidsInsideRadius.length*/, y: ySum /*/ boidsInsideRadius.length*/ };
+    // return Flock.getCenter(boidsInsideRadius);
   }
 
-  static getBirdsInsideRadius(bird: Boid, birdsAround: Boid[], radius: number): Boid[] {
-    return birdsAround.filter((validatableBird) => {
-      return isInsideRadius(bird.getCoords(), validatableBird.getCoords(), radius);
+  static getBoidsInsideRadius(boid: Boid, boidsAround: Boid[], radius: number): Boid[] {
+    return boidsAround.filter((validatableBird) => {
+      return isInsideRadius(boid.getCoords(), validatableBird.getCoords(), radius);
     });
   }
 

@@ -22,7 +22,7 @@ import { Coords } from '../../types';
 })
 export class BoidComponent implements OnInit, OnChanges {
   @Input() boid: Boid;
-  @Input() birdsAround: Boid[];
+  @Input() boidsAround: Boid[];
 
   constructor(
     private renderer: Renderer2,
@@ -36,9 +36,9 @@ export class BoidComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('birdsAround' in changes) {
-      const target = Flock.getCenter(this.birdsAround);
-      const safePoint = Flock.getSafePoint(this.boid, this.birdsAround, Boid.SAFE_DISTANCE);
+    if ('boidsAround' in changes) {
+      const target = Flock.getCenter(this.boidsAround);
+      const safePoint = Flock.getSafePoint(this.boid, this.boidsAround, Boid.SAFE_DISTANCE);
       this.boid.setTarget(target);
       this.boid.setSafePoint(safePoint);
     }
