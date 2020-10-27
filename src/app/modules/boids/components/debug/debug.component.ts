@@ -33,11 +33,6 @@ export class DebugComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  onSubmit(): void {
-    // Object.values(this.form.controls).forEach(control => control.markAsDirty());
-    // this.submitEvent.emit(this.form);
-  }
-
   private listenToShowGrid(): void {
     this.form.get('show_grid')
       ?.valueChanges
