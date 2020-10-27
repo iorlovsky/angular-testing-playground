@@ -3,11 +3,13 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as BoidsActions from './boids.actions';
 
 export type BoidsState = {
-  isDebugEnabled: boolean
+  isDebugEnabled: boolean,
+  isGridShown: boolean
 };
 
 export const initialState: BoidsState = {
-  isDebugEnabled: true
+  isDebugEnabled: true,
+  isGridShown: false
 };
 
 const _boidsReducer = createReducer(
