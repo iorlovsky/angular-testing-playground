@@ -8,6 +8,12 @@ class MockBoidsService {
 
   disableDebug(): void {
   }
+
+  showGrid(): void {
+  }
+
+  hideGrid(): void {
+  }
 }
 
 export function provideMockBoidsService(): Provider {

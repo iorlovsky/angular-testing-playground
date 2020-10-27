@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { disableDebug, enableDebug } from '../../boids.actions';
+import { disableDebug, enableDebug, hideGrid, showGrid } from '../../boids.actions';
 import { BoidsState } from '../../boids.reducer';
 
 @Injectable({
@@ -20,5 +20,13 @@ export class BoidsService {
 
   disableDebug(): void {
     this.store.dispatch(disableDebug());
+  }
+
+  showGrid(): void {
+    this.store.dispatch(showGrid());
+  }
+
+  hideGrid(): void {
+    this.store.dispatch(hideGrid());
   }
 }
