@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, withLatestFrom } from 'rxjs/operators';
 
 import { Animator } from '../../../../models/animator';
-import { topSlideIn, topSlideOut } from '../../../core/animations';
+import { fadeIn, fadeOut, topSlideIn, topSlideOut } from '../../../core/animations';
 import { BoidsState } from '../../boids.reducer';
 import { selectIsDebugEnabled, selectIsGridShown } from '../../boids.selectors';
 import { BoidComponent } from '../../components/boid/boid.component';
@@ -25,6 +25,12 @@ import { BoidsService } from '../../services/boids/boids.service';
       // tslint:disable:no-magic-numbers
       transition('void => *', useAnimation(topSlideIn(150))),
       transition('* => void', useAnimation(topSlideOut(150)))
+      // tslint:enable:no-magic-numbers
+    ]),
+    trigger('fadeInOut', [
+      // tslint:disable:no-magic-numbers
+      transition('void => *', useAnimation(fadeIn())),
+      transition('* => void', useAnimation(fadeOut()))
       // tslint:enable:no-magic-numbers
     ])
   ]

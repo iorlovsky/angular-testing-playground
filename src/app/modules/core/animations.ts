@@ -13,3 +13,17 @@ export function topSlideOut(height: number): AnimationReferenceMetadata {
     animate('250ms ease-in', style({ transform: `translateY(-${height}px)` }))
   ]);
 }
+
+export function fadeIn(duration: number = 250): AnimationReferenceMetadata {
+  return animation([
+    style({ opacity: 0 }),
+    animate(`${duration}ms ease-in`, style({ opacity: 1 }))
+  ]);
+}
+
+export function fadeOut(duration: number = 250): AnimationReferenceMetadata {
+  return animation([
+    style({ opacity: 1 }),
+    animate(`${duration}ms ease-in`, style({ opacity: 0 }))
+  ]);
+}
