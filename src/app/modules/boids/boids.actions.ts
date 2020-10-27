@@ -7,3 +7,11 @@ export const enableDebug = createAction(
 export const disableDebug = createAction(
   '[Boids Page] Disable Debug',
 );
+
+export const showGrid = createAction(
+  '[Boids Page] Show Grid'
+);
+
+export const hideGrid = createAction(
+  '[Boids Page] Hide Grid'
+);
