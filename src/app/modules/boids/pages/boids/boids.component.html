@@ -19,6 +19,7 @@
   </button>
 </section>
 
-<!--<app-grid-->
-<!--  [step]="50">-->
-<!--</app-grid>-->
+<app-grid
+  *ngIf="isGridShown$ | async"
+  [step]="50">
+</app-grid>

@@ -9,7 +9,7 @@ import { map, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { Animator } from '../../../../models/animator';
 import { topSlideIn, topSlideOut } from '../../../core/animations';
 import { BoidsState } from '../../boids.reducer';
-import { selectIsDebugEnabled } from '../../boids.selectors';
+import { selectIsDebugEnabled, selectIsGridShown } from '../../boids.selectors';
 import { BoidComponent } from '../../components/boid/boid.component';
 import { Boid } from '../../models/boid.model';
 import { Flock } from '../../models/flock.model';
@@ -35,6 +35,7 @@ export class BoidsComponent implements AfterViewInit, OnDestroy {
 
   readonly flock: Flock;
   readonly isDebugEnabled$: Observable<boolean>;
+  readonly isGridShown$: Observable<boolean>;
 
   private boidsCount: number = 10;
   private readonly fps: number = 60;
@@ -47,6 +48,7 @@ export class BoidsComponent implements AfterViewInit, OnDestroy {
     private store: Store<{ boids: BoidsState }>
   ) {
     this.isDebugEnabled$ = this.store.select(selectIsDebugEnabled);
+    this.isGridShown$ = this.store.select(selectIsGridShown);
     this.flock = new Flock();
     this.flock.setBoidsCount(this.boidsCount);
     const xRange = {
