@@ -7,8 +7,8 @@ import { Observable, Subject } from 'rxjs';
 import { map, takeUntil, withLatestFrom } from 'rxjs/operators';
 
 import { Animator } from '../../../../models/animator';
+import { AppState } from '../../../../types/state';
 import { fadeIn, fadeOut, topSlideIn, topSlideOut } from '../../../core/animations';
-import { BoidsState } from '../../boids.reducer';
 import { selectIsDebugEnabled, selectIsGridShown } from '../../boids.selectors';
 import { BoidComponent } from '../../components/boid/boid.component';
 import { Boid } from '../../models/boid.model';
@@ -51,7 +51,7 @@ export class BoidsComponent implements AfterViewInit, OnDestroy {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private boidsService: BoidsService,
-    private store: Store<{ boids: BoidsState }>
+    private store: Store<AppState>
   ) {
     this.isDebugEnabled$ = this.store.select(selectIsDebugEnabled);
     this.isGridShown$ = this.store.select(selectIsGridShown);
