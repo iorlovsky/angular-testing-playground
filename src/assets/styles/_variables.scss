@@ -1,7 +1,9 @@
 @import "fonts";
+@import "colors";
 
 $debug-grid-z-index: 1;
 $boid-z-index: calc(#{$debug-grid-z-index} + 1);
-$boids-font-color: #8E8D8A;
+$boids-font-color: $heathered-grey;
+$boids-debug-background: rgba($raffia, 0.5);
 $boids-control-font-size: 20px;
 $boids-control-font-weight: $font-weight-medium;

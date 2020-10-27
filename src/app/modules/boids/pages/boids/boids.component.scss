@@ -53,6 +53,6 @@
 
   .debug {
     @include panel;
-    background: rgba($boids-font-color, 0.5);
+    background: $boids-debug-background;
   }
 }
