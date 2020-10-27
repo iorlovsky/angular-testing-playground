@@ -39,8 +39,8 @@
     &__button {
       @include reset-button;
       height: 40px;
-      font-size: $boids-button-font-size;
-      font-weight: 500;
+      font-size: $boids-control-font-size;
+      font-weight: $boids-control-font-weight;
       color: $boids-font-color;
       border: 1px solid $boids-font-color;
       border-radius: 1px;
