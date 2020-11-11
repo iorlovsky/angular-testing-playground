@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideMockBoidsService } from '../../services/boids/boids.service.mock';
 import { DebugComponent } from './debug.component';
 
 describe('DebugComponent', () => {
@@ -8,7 +9,10 @@ describe('DebugComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DebugComponent]
+      declarations: [DebugComponent],
+      providers: [
+        provideMockBoidsService()
+      ]
     })
       .compileComponents();
   }));
